@@ -3,6 +3,7 @@
   <groupId>es.unican.is2</groupId>
   <artifactId>SegurosBusiness</artifactId>
   <version>0.0.1-SNAPSHOT</version>
+<<<<<<< HEAD
   <dependencies>
   	<dependency>
   		<groupId>es.unican.is2</groupId>
@@ -10,4 +11,11 @@
   		<version>0.0.1-SNAPSHOT</version>
   	</dependency>
   </dependencies>
+=======
+  
+
+  
+  
+  
+>>>>>>> 3cfa18ff288739a3d21d62ffee0365f17f496d2e
 </project>
