@@ -3,4 +3,11 @@
   <groupId>es.unican.is2</groupId>
   <artifactId>SegurosBusiness</artifactId>
   <version>0.0.1-SNAPSHOT</version>
+  <dependencies>
+  	<dependency>
+  		<groupId>es.unican.is2</groupId>
+  		<artifactId>SegurosCommon</artifactId>
+  		<version>0.0.1-SNAPSHOT</version>
+  	</dependency>
+  </dependencies>
 </project>

@@ -3,4 +3,21 @@
   <groupId>es.unican.is2</groupId>
   <artifactId>SegurosMain</artifactId>
   <version>0.0.1-SNAPSHOT</version>
+  <dependencies>
+  	<dependency>
+  		<groupId>es.unican.is2</groupId>
+  		<artifactId>SegurosBusiness</artifactId>
+  		<version>0.0.1-SNAPSHOT</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>es.unican.is2</groupId>
+  		<artifactId>SegurosDAOH2</artifactId>
+  		<version>0.0.1-SNAPSHOT</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>es.unican.is2</groupId>
+  		<artifactId>SegurosGUI</artifactId>
+  		<version>0.0.1-SNAPSHOT</version>
+  	</dependency>
+  </dependencies>
 </project>
