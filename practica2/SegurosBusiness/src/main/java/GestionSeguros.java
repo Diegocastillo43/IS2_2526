@@ -1,5 +1,5 @@
 
-public class GestionSeguros {
+public class GestionSeguros implements IGestionSeguros, IGestionClientes, IInfoSeguros{
 	
 	public GestionSeguros(IClientesDAO daoClientes, ISegurosDAO daoSeguros) {
 		
@@ -8,31 +8,33 @@ public class GestionSeguros {
 	/**
      * Añade un nuevo cliente al sistema
      */
-    public void nuevoCliente(Cliente c) {
+    public Cliente nuevoCliente(Cliente c) {
         // TODO: 
+    	return null;
     }
 
     /**
      * Elimina un cliente si no tiene seguros asociados
      */
-    public boolean bajaCliente(String dni) {
+    public Cliente bajaCliente(String dni) {
         // TODO:
-        return false;
+        return null;
     }
 
     /**
      * Crea un nuevo seguro para un cliente
      */
-    public void nuevoSeguro(Seguro s, String dni) {
+    public Seguro nuevoSeguro(Seguro s, String dni) {
         // TODO
+    	return null;
     }
 
     /**
      * Da de baja un seguro
      */
-    public boolean bajaSeguro(String matricula, String dni) {
+    public Seguro bajaSeguro(String matricula, String dni) {
         // TODO:
-        return false;
+        return null;
     }
     
     /**
@@ -51,8 +53,21 @@ public class GestionSeguros {
         return null; 
     }
     
-    public void anhadirConductorAdicional(String matricula, String nombreConductor) {
+    public Seguro anhadeConductorAdicional(String matricula, String nombreConductor) {
     	// TODO:
+    	return null;
     }
+
+	@Override
+	public Cliente cliente(String dni) throws DataAccessException {
+		// TODO 
+		return null;
+	}
+
+	@Override
+	public Seguro seguro(String matricula) throws DataAccessException {
+		// TODO
+		return null;
+	}
     
 }
