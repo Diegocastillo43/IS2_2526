@@ -47,65 +47,72 @@ public class SegurosDAO implements ISegurosDAO {
 		return seguro;
 	}
 
-	@Override
 	public Seguro seguro(long id) throws DataAccessException {
-		Seguro result = null; 
-		Connection con = H2ServerConnectionManager.getConnection();
-		try {
-			Statement statement = con.createStatement();
-			String statementText = "select * from Seguros where id = '"+ id+"'";
-			ResultSet results = statement.executeQuery(statementText);
-			if (results.next()) { 
-				result = SeguroMapper.toSeguro(results);
-			}
-			statement.close(); 
-		}
-		catch (SQLException e) {
-			e.printStackTrace();
-			throw new DataAccessException();
-		}
-		return result;
-	}
+    Seguro result = null;
+    String sql = "select id, matricula, fechaInicio, cobertura, potencia, conductorAdicional, cliente_FK from Seguros where id = " + id;
+
+    // Aquí solo declaramos 'con' UNA vez dentro del try
+    try (Connection con = H2ServerConnectionManager.getConnection();
+         Statement stm = con.createStatement()) {
+        
+        ResultSet rs = stm.executeQuery(sql);
+        if (rs.next()) {
+            result = SeguroMapper.toSeguro(rs);
+        }
+    } catch (SQLException e) {
+        throw new DataAccessException();
+    }
+    return result;
+}
 
 	@Override
-	public List<Seguro> seguros() throws DataAccessException {
-		List<Seguro> seguros = new LinkedList<Seguro>();
-		Connection con = H2ServerConnectionManager.getConnection(); 
-		try {
-			Statement statement = con.createStatement(); 
-			String statementText = "select * from Seguros"; 
-			ResultSet results = statement.executeQuery(statementText); 
-			// Procesamos cada fila como vehiculo independiente
-			while (results.next()) {
-				seguros.add(SeguroMapper.toSeguro(results)); 
-			}
-			statement.close(); 
-		} catch (SQLException e) {
-			// System.out.println(e);
-			throw new DataAccessException();
-		}
+public List<Seguro> seguros() throws DataAccessException {
+    List<Seguro> seguros = new LinkedList<Seguro>();
+    String statementText = "select * from Seguros";
 
-		return seguros;
-	}
+    // Al declarar 'con' y 'statement' aquí, Java los cierra SÍ O SÍ al terminar el try
+    try (Connection con = H2ServerConnectionManager.getConnection();
+         Statement statement = con.createStatement()) {
+        
+        ResultSet results = statement.executeQuery(statementText);
+        
+        // Procesamos cada fila como vehículo independiente según el Anexo 2
+        while (results.next()) {
+            seguros.add(SeguroMapper.toSeguro(results));
+        }
+        
+    } catch (SQLException e) {
+        // Se lanza la excepción personalizada de la práctica
+        throw new DataAccessException();
+    }
+
+    return seguros;
+}
 
 	@Override
-	public Seguro seguroPorMatricula(String matricula) throws DataAccessException {
-		Seguro result = null; 
-		Connection con = H2ServerConnectionManager.getConnection();
-		try {
-			Statement statement = con.createStatement();
-			String statementText = "select * from Seguros where matricula = '"+ matricula+"'";
-			ResultSet results = statement.executeQuery(statementText);
-			if (results.next()) { 
-				result = SeguroMapper.toSeguro(results);
-			}
-			statement.close(); 
-		}
-		catch (SQLException e) {
-			throw new DataAccessException();
-		}
-		return result;
-	}
+public Seguro seguroPorMatricula(String matricula) throws DataAccessException {
+    Seguro result = null;
+    String statementText = "select * from Seguros where matricula = '" + matricula + "'";
+    
+    // Al incluir Connection y Statement en el try, garantizamos su cierre automático
+    try (Connection con = H2ServerConnectionManager.getConnection();
+         Statement statement = con.createStatement()) {
+        
+        ResultSet results = statement.executeQuery(statementText);
+        
+        if (results.next()) {
+            result = SeguroMapper.toSeguro(results);
+        }
+        
+        // El statement.close() manual ya no es necesario aquí
+        
+    } catch (SQLException e) {
+        // Capturamos el error de la base de datos H2 y lanzamos la excepción de la práctica
+        throw new DataAccessException();
+    }
+    
+    return result;
+}
 	
 	
 

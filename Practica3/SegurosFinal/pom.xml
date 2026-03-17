@@ -16,7 +16,7 @@
         <!-- Propiedades para usar SonarQube en local-->
         <sonar.host.url>http://localhost:9000</sonar.host.url>
         <!-- modificar este token por el vuestro -->
-        <sonar.token>sqa_9368abf2130720ffa64dac9ed0513534936b8258</sonar.token> 
+        <sonar.token>sqa_b5aca43ed05c5a63d941511fc24877e19a741773</sonar.token> 
         
         <!-- Propiedades para usar SonarCloud -->
         <!-- <sonar.projectKey>Seguros3</sonar.projectKey> -->

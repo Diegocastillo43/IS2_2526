@@ -9,6 +9,12 @@ import java.sql.SQLException;
  */
 public class ClienteMapper {
 
+	// 1. Añadimos el constructor privado para "esconder" el público por defecto
+  	private ClienteMapper() {
+    // Opcional: lanzar una excepción por si alguien intenta usar reflexión
+    	throw new IllegalStateException("Utility class");
+  }
+
 	/**
 	 * Recibe una fila de la BBDD correspondinete a un Cliente 
 	 * y devuelve un objeto Cliente con los datos correspondientes
