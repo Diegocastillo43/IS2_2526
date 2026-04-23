@@ -139,34 +139,34 @@ public class Seguro {
 	 *         0 si el seguro todavía no está en vigor (no se ha alcanzado su fecha de inicio)
      */
 	public double precio() {
-        // 1. Comprobar si está en vigor
+        // Regla: Si se consulta antes de su inicio, retorna 0
         if (fechaInicio.isAfter(LocalDate.now())) {
             return 0;
         }
 
-        double precioBase = 0;
+        double total = 0;
         
-        // 2. Precio según Cobertura
+        // 1. Nivel de cobertura (Precio Base)
         switch (cobertura) {
-            case TERCEROS: precioBase = 400; break;
-            case TERCEROS_LUNAS: precioBase = 450; break;
-            case TODO_RIESGO: precioBase = 600; break;
+            case TODO_RIESGO: total = 1000; break;
+            case TERCEROS_LUNAS: total = 600; break;
+            case TERCEROS: total = 400; break;
         }
 
-        // 3. Recargo por potencia
+        // 2. Potencia del coche (Subida porcentual)
         if (potencia > 110) {
-            precioBase += 50;
-        } else if (potencia > 90) {
-            precioBase += 20;
+            total += total * 0.20; // +20%
+        } else if (potencia >= 90) {
+            total += total * 0.05; // +5% (90 a 110 incluidos)
         }
 
-        // 4. Descuento por antigüedad (Si lleva más de 20 años)
-        int antiguedad = Period.between(fechaInicio, LocalDate.now()).getYears();
-        if (antiguedad > 20) {
-            precioBase = precioBase * 0.8;
+        // 3. Oferta (Descuento 20% durante el primer año)
+        long mesesAntiguedad = Period.between(fechaInicio, LocalDate.now()).toTotalMonths();
+        if (mesesAntiguedad < 12) {
+            total -= total * 0.20;
         }
 
-        return precioBase;
+        return total;
     }
 	
 }
