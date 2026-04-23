@@ -1,6 +1,8 @@
 
 
 import java.time.LocalDate;
+import java.time.Period;
+import java.util.Objects;
 
 /**
  * Clase que representa un seguro de coche.
@@ -18,6 +20,27 @@ public class Seguro {
     private LocalDate fechaInicio;
 
 	private String conductorAdicional;
+	
+	public Seguro(long id, String matricula, int potencia, Cobertura cobertura, LocalDate fechaInicio) {
+        this.id = id;
+        this.matricula = matricula;
+        this.potencia = potencia;
+        this.cobertura = cobertura;
+        this.fechaInicio = fechaInicio;
+    }
+	
+	@Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Seguro seguro = (Seguro) o;
+        return id == seguro.id && Objects.equals(matricula, seguro.matricula);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, matricula);
+    }
 
 	/**
 	 * Retorna el identificador del seguro
@@ -116,7 +139,34 @@ public class Seguro {
 	 *         0 si el seguro todavía no está en vigor (no se ha alcanzado su fecha de inicio)
      */
 	public double precio() {
-		return 0;
-	}
+        // 1. Comprobar si está en vigor
+        if (fechaInicio.isAfter(LocalDate.now())) {
+            return 0;
+        }
+
+        double precioBase = 0;
+        
+        // 2. Precio según Cobertura
+        switch (cobertura) {
+            case TERCEROS: precioBase = 400; break;
+            case TERCEROS_LUNAS: precioBase = 450; break;
+            case TODO_RIESGO: precioBase = 600; break;
+        }
+
+        // 3. Recargo por potencia
+        if (potencia > 110) {
+            precioBase += 50;
+        } else if (potencia > 90) {
+            precioBase += 20;
+        }
+
+        // 4. Descuento por antigüedad (Si lleva más de 20 años)
+        int antiguedad = Period.between(fechaInicio, LocalDate.now()).getYears();
+        if (antiguedad > 20) {
+            precioBase = precioBase * 0.8;
+        }
+
+        return precioBase;
+    }
 	
 }

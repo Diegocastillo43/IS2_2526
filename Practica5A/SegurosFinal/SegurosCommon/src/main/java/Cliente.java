@@ -1,5 +1,6 @@
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Clase que representa un cliente de la empresa de seguros
@@ -14,6 +15,12 @@ public class Cliente {
     private boolean minusvalia;
 
     private List<Seguro> seguros = new LinkedList<Seguro>();
+    
+    public Cliente(String dni, String nombre, boolean minusvalia) {
+        this.dni = dni;
+        this.nombre = nombre;
+        this.minusvalia = minusvalia;
+    }
     
 	/**
      * Retorna los seguros del cliente 
@@ -76,8 +83,29 @@ public class Cliente {
      * Calcula el total a pagar por el cliente por 
      * todos los seguros a su nombre
      */
-    public double totalSeguros() {
-        return 0;
+     public double totalSeguros() {
+         double total = 0;
+         for (Seguro s : seguros) {
+             total += s.precio();
+         }
+         // Aplicar descuento por minusvalía si procede
+         if (minusvalia) {
+             total = total * 0.75;
+         }
+         return total;
+     }
+    
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Cliente cliente = (Cliente) o;
+        return Objects.equals(dni, cliente.dni);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(dni);
     }
 
 }
