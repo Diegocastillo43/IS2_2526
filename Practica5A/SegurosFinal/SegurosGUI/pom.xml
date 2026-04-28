@@ -10,7 +10,41 @@
 			<artifactId>SegurosCommon</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
-	</dependencies>
+		
+		<dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-swing-junit</artifactId>
+            <version>3.17.1</version>
+            <scope>test</scope>
+        </dependency>
+		<dependency>
+			<groupId>es.unican.is2</groupId>
+			<artifactId>SegurosDAOH2</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>es.unican.is2</groupId>
+			<artifactId>SegurosBusiness</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+   </dependencies>
+	<build>
+		<plugins>	
+			<plugin>
+	    		<groupId>org.apache.maven.plugins</groupId>
+	    		<artifactId>maven-failsafe-plugin</artifactId>
+	   		    <version>3.5.2</version>
+	    		<executions>
+	        		<execution>
+	            		<goals>
+	                		<goal>integration-test</goal>
+	                		<goal>verify</goal>
+	            		</goals>
+	        		</execution>
+	    		</executions>
+			</plugin>
+		</plugins>
+	</build>
   
   
 </project>
