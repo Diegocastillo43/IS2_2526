@@ -1,3 +1,4 @@
+package es.unican.is2;
 
 
 import java.sql.Connection;
@@ -6,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.LinkedList;
 import java.util.List;
+import es.unican.is2.Seguro;
 
 
 public class SegurosDAO implements ISegurosDAO {
