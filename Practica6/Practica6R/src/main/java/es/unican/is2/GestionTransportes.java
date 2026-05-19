@@ -2,12 +2,12 @@ package es.unican.is2;
 import java.util.ArrayList;
 import java.util.List;
 
-public class gestionTransportes {
+public class GestionTransportes {
 
 	private ArrayList<Conductor> cs = new ArrayList<Conductor>();
 	
 	// CC = 3 = base + if + for
-	// CCog = 3 = 1 for + 2 if `por estar dentro 
+	// CCog = 3 = 1 for + 2 if por estar dentro 
 	public Conductor buscaConductor(String DNI) {		
 		for(Conductor c: cs) 
 			if (c.dni().equals(DNI))

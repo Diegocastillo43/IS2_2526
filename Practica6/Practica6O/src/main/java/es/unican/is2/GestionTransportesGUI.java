@@ -10,6 +10,24 @@ public class GestionTransportesGUI {
 
 	/**
 	 * Programa principal basado en menu
+	 * CC: 1 base + 1 while + 4 cases del switch principal + 1 if + 1 if 
+	 * + 3 cases switch anidado + 1 if + 1 for + 1 if + 1 else if + 1 if + 1 for = 17
+	 * Desglose CCog por niveles de anidamiento (N):
+	 * +1 por el while (N1)
+	 * +2 por el switch de opcion (N2)
+	 * +3 por el if de anhadeConductor (N3)
+	 * +3 por el if de anhadeTransporte (c!=null) (N3)
+	 * +4 por el switch de tipo anidado en el if (N4)
+	 * +1 por el else
+	 * +3 por el if de sueldoConductor (N3)
+	 * +1 por el else
+	 * +3 por el for de mejorConductor (N3)
+	 * +4 por el if (sueldo > max) anidado en el for (N4)
+	 * +4 por el else if (sueldo == max) anidado en el for (N4)
+	 * +3 por el if (resultado.size == 0) (N3)
+	 * +1 por el else
+	 * +4 por el for anidado en el else (N4)
+	 * Total = 1+2+3+3+4+1+3+1+3+4+4+3+1+4 = 37
 	 */
 	public static void main(String[] args) {
 		// opciones del menu
@@ -136,10 +154,15 @@ public class GestionTransportesGUI {
 	 * @param titulo titulo de la ventana
 	 * @param txt texto contenido en la ventana
 	 */
+	// CC = 1
+	// CCog = 0
 	private static void mensaje(String titulo, String txt) {
 		Mensaje msj = new Mensaje(titulo);
 		msj.escribe(txt);
 
 	}
+	
+	// WMC = 17 + 1 = 18
+	// CCog = 37 + 0 = 37
 
 }

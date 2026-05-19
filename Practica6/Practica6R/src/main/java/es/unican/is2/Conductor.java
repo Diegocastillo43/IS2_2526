@@ -12,10 +12,10 @@ public class Conductor {
 	private String nombre;
 	private String apellido1;
 	private String apellido2;
-	private String dire;
+	private String direccion;
 
-	// CC = 2 if con clausulas or
-	// CCog = 1 = if 
+	// CC = 5 = 1 + 1 if + 3 ors
+	// CCog = 2 = 1 if + 1 ors
 	public Conductor(String dni, String nombre, String apellido1,
 			String apellido2, String direccion) {
 		if (dni == null || nombre == null || apellido1 == null || direccion == null) {
@@ -25,7 +25,7 @@ public class Conductor {
 		this.nombre = nombre;
 		this.apellido1 = apellido1;
 		this.apellido2 = apellido2;
-		this.dire = direccion;
+		this.direccion = direccion;
 	}
 
 	// CC = 1
@@ -54,37 +54,22 @@ public class Conductor {
 
 	// CC = 1
 	// CCog = 0
-	public String apellido2() {
+	public String getapellido2() {
 		return apellido2;
 	}
 
 	// CC = 1
 	// CCog = 0
-	public String getDire() {
-		return dire;
+	public String getDireccion() {
+		return direccion;
 	}
 
-	// CC = 6 = 1 + 1 for + 2 switch con 3 casos + 2 if-else 
-	// CCog = 6 = 1 for + 2 switch + 3 if-else
+	// CC = 2 = 1 + 1 for
+	// CCog = 1
 	public double sueldo() {
 		double sueldoTransportes = 0;
 		for (Transporte t : transportes) {
-			double sueldoExtraTransporte = 0.0;
-			switch (t.categoria()) {
-				case Mercancias:
-					sueldoExtraTransporte = t.ton() * 2;
-					break;
-				case MercanciasPeligrosas:
-					sueldoExtraTransporte = t.ton() * 2 + 50;
-					break;
-				case Personas:
-					if (t.getPersonas() < 10)
-						sueldoExtraTransporte = t.horas() * 0.5;
-					else
-						sueldoExtraTransporte = t.horas();
-					break;
-			}
-			sueldoTransportes += t.horas() * 5 + sueldoExtraTransporte;
+			sueldoTransportes += t.horas() * 5 + t.extraSueldo();
 		}
 		return 700 + sueldoTransportes;
 	}
@@ -95,7 +80,7 @@ public class Conductor {
 		transportes.add(t);
 	}
 	
-	// WMC = 2 + 6 + 1 + 6 = 15
-	// CCog = 1 + 0 + 0 + 6 = 7
+	// WMC = 5 + 2 + 1 + 1... = 14
+	// CCog = 2 + 1 + 0 + 0 ... = 3
 
 }

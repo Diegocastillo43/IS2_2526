@@ -14,8 +14,8 @@ public class Conductor {
 	private String apellido2;
 	private String dire;
 
-	// CC = 2 if con clausulas or
-	// CCog = 1 = if 
+	// CC = 5 if con clausulas or
+	// CCog = 2
 	public Conductor(String dni, String nombre, String apellido1,
 			String apellido2, String direccion) {
 		if (dni == null || nombre == null || apellido1 == null || direccion == null) {
@@ -64,8 +64,8 @@ public class Conductor {
 		return dire;
 	}
 
-	// CC = 6 = 1 + 1 for + 2 switch con 3 casos + 2 if-else 
-	// CCog = 6 = 1 for + 2 switch + 3 if-else
+	// CC = 6 = 1 base + 1 por el for + 3 por los case del switch + 1 por el if
+	// CCog = 7 = 1 por for + 2 switch anidado + 3 por if anidado + 1 por else
 	public double sueldo() {
 		double sueldoTransportes = 0;
 		for (Transporte t : transportes) {
@@ -95,7 +95,7 @@ public class Conductor {
 		transportes.add(t);
 	}
 	
-	// WMC = 2 + 6 + 1 + 6 = 15
-	// CCog = 1 + 0 + 0 + 6 = 7
+	// WMC = 5 + 6 + 1 + 6 = 18
+	// CCog = 2 + 0 + 0 + 7 = 9
 
 }

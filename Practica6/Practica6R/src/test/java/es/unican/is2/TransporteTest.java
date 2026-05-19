@@ -11,28 +11,26 @@ public class TransporteTest {
     public void testConstructor() {
 
         // Casos validos
-        Transporte sut = new Transporte(1, CategoriaTransporte.Mercancias, 1);
-        assertEquals(1, sut.horas());
-        assertEquals(CategoriaTransporte.Mercancias, sut.categoria());
-        assertEquals(1, sut.ton());
-        assertEquals(0, sut.getPersonas());
+        TransporteMercancias tm = new TransporteMercancias(1, 1);
+        assertEquals(1, tm.horas());
+        assertEquals(1, tm.getToneladas());
         
-        sut = new Transporte(10, CategoriaTransporte.MercanciasPeligrosas, 1000);
-        assertEquals(10, sut.horas());
-        assertEquals(CategoriaTransporte.MercanciasPeligrosas, sut.categoria());
-        assertEquals(1000, sut.ton());
-        assertEquals(0, sut.getPersonas());
+        TransporteMercanciasPeligrosas tmp = new TransporteMercanciasPeligrosas(10, 1000);
+        assertEquals(10, tmp.horas());
+        assertEquals(1000, tmp.getToneladas());
 
-        sut = new Transporte(10, CategoriaTransporte.Personas, 10);
-        assertEquals(10, sut.horas());
-        assertEquals(CategoriaTransporte.Personas, sut.categoria());
-        assertEquals(10, sut.getPersonas());
-        assertEquals(0, sut.ton());
+        TransportePersonas tp = new TransportePersonas(10, 10);
+        assertEquals(10, tp.horas());
+        assertEquals(10, tp.getPersonas());
+ 
 
         // Casos no validos
-        assertThrows(IllegalArgumentException.class, () -> new Transporte(0, CategoriaTransporte.Mercancias, 1));
-        assertThrows(IllegalArgumentException.class, () -> new Transporte(10, CategoriaTransporte.Mercancias, 0));
-        assertThrows(IllegalArgumentException.class, () -> new Transporte(10, null, 10));
+        assertThrows(IllegalArgumentException.class, () -> new TransporteMercancias(0, 1));
+        assertThrows(IllegalArgumentException.class, () -> new TransportePersonas(-5, 10));
+        
+        assertThrows(IllegalArgumentException.class, () -> new TransporteMercancias(10, 0));
+        assertThrows(IllegalArgumentException.class, () -> new TransporteMercancias(10, -5));
+        assertThrows(IllegalArgumentException.class, () -> new TransportePersonas(10, 0));
     }
 
 }
