@@ -4,12 +4,12 @@ import java.util.List;
 
 public class GestionTransportes {
 
-	private ArrayList<Conductor> cs = new ArrayList<Conductor>();
+	private ArrayList<Conductor> conductores = new ArrayList<Conductor>();
 	
 	// CC = 3 = base + if + for
 	// CCog = 3 = 1 for + 2 if por estar dentro 
 	public Conductor buscaConductor(String DNI) {		
-		for(Conductor c: cs) 
+		for(Conductor c: conductores) 
 			if (c.dni().equals(DNI))
 				return c;
 		
@@ -21,14 +21,14 @@ public class GestionTransportes {
 	public boolean anhadeConductor(String dni, String nombre, String apellido1, String apellido2, String direccion) {
 		if (buscaConductor(dni) != null)
 			return false;
-		cs.add(new Conductor(dni, nombre, apellido1, apellido2,direccion));
+		conductores.add(new Conductor(dni, nombre, apellido1, apellido2,direccion));
 		return true;
 	}
 
 	// CC = 1
 	// CCog = 0 
 	public List<Conductor> conductores() {
-		return cs;
+		return conductores;
 	}
 	
 	// WMC = 3 + 2 + 1 = 6
